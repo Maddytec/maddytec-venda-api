@@ -3,7 +3,9 @@ package br.com.maddytec.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,8 +16,11 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "endereco")
+@Embeddable
 public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -111,7 +116,8 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "cliente_id", nullable = false)
 	public Cliente getCliente() {
 		return cliente;
@@ -165,5 +171,4 @@ public class Endereco implements Serializable {
 	public boolean isExistente() {
 		return !isNovo();
 	}
-	
 }

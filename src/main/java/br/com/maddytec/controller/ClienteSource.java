@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +27,8 @@ public class ClienteSource {
 	ClienteService clienteService;
 	
 	@PostMapping
-	public void criar(@Valid @RequestBody Cliente cliente) {
-		clienteService.criar(cliente);
+	public void save(@Valid @RequestBody Cliente cliente) {
+		clienteService.save(cliente);
 	}
 	
 	@GetMapping("/{id}")
@@ -36,10 +36,10 @@ public class ClienteSource {
 		return clienteService.findById(id);
 	}
 	
+	@CrossOrigin
 	@GetMapping
-	public ResponseEntity<List<Cliente>> findByAll() {
-		List<Cliente> list = clienteService.findByAll();
-		return new ResponseEntity<List<Cliente>>(list, HttpStatus.OK);
+	public List<Cliente> findAll() {
+		return clienteService.findAll();
 	}
 	
 	@DeleteMapping("/{codigo}")
