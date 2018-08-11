@@ -2,7 +2,6 @@ package br.com.maddytec.service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +35,12 @@ public class ProdutoService implements Serializable {
 	public Produto findById(Long id) {
 		return produtos.findById(id).get();
 	}
-
+	
+	public void deleteFindById(Long id) {
+		produtos.deleteById(id);
+	}
+	
+	public void delete(Produto produto) {
+		produtos.delete(produto);
+	}
 }

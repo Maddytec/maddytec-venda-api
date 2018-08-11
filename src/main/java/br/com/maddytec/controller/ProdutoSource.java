@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maddytec.model.Categoria;
-import br.com.maddytec.model.Cliente;
 import br.com.maddytec.model.Produto;
 import br.com.maddytec.repository.Categorias;
 import br.com.maddytec.service.ProdutoService;
@@ -72,7 +71,6 @@ public class ProdutoSource implements Serializable {
 		return produtoService.save(produto);
 	}
 	
-	@CrossOrigin
 	@GetMapping
 	public List<Produto> findAll(){
 		return produtoService.findAll();
@@ -81,8 +79,12 @@ public class ProdutoSource implements Serializable {
 	@GetMapping("/{id}")
 	public Produto findById(@PathVariable("id") Long id) {
 		return produtoService.findById(id);
-	}
+	}	
 	
+	@DeleteMapping("/{id}")
+	public void deleteFindById(@PathVariable Long id) {
+		produtoService.deleteFindById(id);
+	}
 	
 	public boolean isEditando() {
 		return this.produto.getId() != null;
@@ -124,5 +126,4 @@ public class ProdutoSource implements Serializable {
 	public List<Categoria> getSubcategorias() {
 		return subcategorias;
 	}
-
 }

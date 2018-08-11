@@ -24,7 +24,7 @@ import br.com.maddytec.service.ClienteService;
 public class ClienteSource {
 	
 	@Autowired
-	ClienteService clienteService;
+	private ClienteService clienteService;
 	
 	@PostMapping
 	public void save(@Valid @RequestBody Cliente cliente) {
@@ -42,9 +42,9 @@ public class ClienteSource {
 		return clienteService.findAll();
 	}
 	
-	@DeleteMapping("/{codigo}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long codigo) {
-		clienteService.delete(codigo);
+	public void delete(@PathVariable Long id) {
+		clienteService.delete(id);
 	}
 }

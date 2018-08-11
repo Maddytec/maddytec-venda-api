@@ -1,6 +1,5 @@
 package br.com.maddytec.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,15 @@ public class ClienteService {
 		return clientes.save(cliente);
 	}
 	
-	public void delete(Long idCliente) {
-	   clientes.deleteById(idCliente);
-	}
-	
-	
-	public Cliente findById(Long idCliente) {		
-		return clientes.findById(idCliente).get();
+	public Cliente findById(Long id) {		
+		return clientes.findById(id).get();
 	}
 	
 	public List<Cliente> findAll() {		
 		return clientes.findAll(); 
 	}
 	
-	
+	public void delete(Long id) {
+		   clientes.deleteById(id);
+		}
 }
