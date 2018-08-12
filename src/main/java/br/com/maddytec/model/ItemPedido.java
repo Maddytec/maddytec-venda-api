@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "item_pedido")
 public class ItemPedido implements Serializable {
@@ -62,6 +64,7 @@ public class ItemPedido implements Serializable {
 		this.produto = produto;
 	}
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pedido_id", nullable = false)
 	public Pedido getPedido() {

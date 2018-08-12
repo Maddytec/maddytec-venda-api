@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
@@ -60,6 +63,7 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	@NotBlank
 	@Size(max = 40)
 	@Column(name = "senha", nullable = false, length = 40)
@@ -71,7 +75,8 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	public List<Grupo> getGrupos() {
 		return grupos;
